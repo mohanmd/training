@@ -15,9 +15,35 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.registerForm = new FormGroup({
-      name: new FormControl('Dayana', Validators.required),
-      country: new FormControl('Uruguay', Validators.required)
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      dob: new FormControl('', Validators.required),
+      mobile: new FormControl('', Validators.required),
    });
+  }
+
+  get name() {
+    return this.registerForm.get('name');
+  }
+  
+  get email() {
+    return this.registerForm.get('email');
+  }
+  
+  get mobile() {
+    return this.registerForm.get('mobile');
+  }
+  
+  get dob() {
+    return this.registerForm.get('dob');
+  }
+
+  submitForm(form: FormGroup){
+    console.log(form.value);
+  }
+
+  getDate(event){
+    console.log(event);
   }
 
 }

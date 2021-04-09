@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>Registration</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="registerForm" (ngSubmit)="submitForm()" novalidate>
+<ion-content class="ion-padding">
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm(registerForm)" novalidate>
 
     <ion-item lines="full">
       <ion-label position="floating">Name</ion-label>
@@ -19,7 +19,7 @@
 
     <ion-item lines="full">
       <ion-label position="floating">DOB</ion-label>
-      <ion-datetime (ionChange)="getDate($event)" formControlName="dob" [value]="defaultDate"></ion-datetime>
+      <ion-datetime  (ionChange)="getDate($event)" formControlName="dob" [value]="defaultDate"></ion-datetime>
     </ion-item>
 
     <ion-item lines="full">
@@ -29,7 +29,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
+        <ion-button type="submit" color="danger" expand="block" [disabled]="!registerForm.valid">Submit</ion-button>
       </ion-col>
     </ion-row>
   </form>
