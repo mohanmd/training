@@ -10,16 +10,28 @@ export class RegisterPage implements OnInit {
   registerForm: FormGroup;
 
   constructor(
-    private register : FormBuilder
+    private formbuilder : FormBuilder
   ) { }
 
   ngOnInit() {
-    this.registerForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      dob: new FormControl('', Validators.required),
-      mobile: new FormControl('', Validators.required),
-   });
+    this.regForm();
+  }
+
+  regForm(){
+    this.registerForm = this.formbuilder.group({
+      name: ['' ,[
+        Validators.maxLength(25),
+        Validators.minLength(5),
+        Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
+        Validators.required
+      ]],
+      email: ['' ,[
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ]],
+      dob: ['', [Validators.required, ]],
+      mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+    });
   }
 
   get name() {
@@ -27,6 +39,7 @@ export class RegisterPage implements OnInit {
   }
   
   get email() {
+    console.log(this.registerForm.get('email'))
     return this.registerForm.get('email');
   }
   
@@ -40,8 +53,13 @@ export class RegisterPage implements OnInit {
 
   submitForm(form: FormGroup){
     console.log(form.value);
+    console.log(form);
+    // this.registerForm.patchValue({
+    //   name: 'Nancy',
+    //   email: 'mohan@xmediasolution.com',
+    //   mobile: '9710823803',
+    // });
   }
-
   getDate(event){
     console.log(event);
   }
