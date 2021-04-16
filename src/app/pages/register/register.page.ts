@@ -37,6 +37,7 @@ export class RegisterPage implements OnInit {
   }
   
   get email() {
+    console.log(this.registerForm.get('email'))
     return this.registerForm.get('email');
   }
   
@@ -71,7 +72,6 @@ export class RegisterPage implements OnInit {
 
     this.router.navigate(['/list']);
   }
-
   getDate(event){
     let date = event.detail.value;
     console.log( event.detail.value)
