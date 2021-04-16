@@ -1,36 +1,59 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Registration</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Registration</ion-title>
+        <ion-button slot="end" (click)="userView()" fill="clear">
+            <ion-icon name="eye-outline"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="registerForm" (ngSubmit)="submitForm(registerForm)" novalidate>
+    <div class="ion-text-right">
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm(registerForm)" novalidate>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Name</ion-label>
-      <ion-input formControlName="name" type="text" required></ion-input>
-    </ion-item>
+        <ion-item lines="full">
+            <ion-label position="floating">Name</ion-label>
+            <ion-input formControlName="name" type="text" required></ion-input>
+        </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="email" required></ion-input>
-    </ion-item>
+        <div *ngIf="(name.dirty || name.touched) && name.errors" class="errors">
+            <span *ngIf="name.errors?.required">Please Enter Name</span>
+        </div>
 
-    <ion-item lines="full">
-      <ion-label position="floating">DOB</ion-label>
-      <ion-datetime  (ionChange)="getDate($event)" formControlName="dob" [value]="defaultDate"></ion-datetime>
-    </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Mobile</ion-label>
-      <ion-input formControlName="mobile" type="text" required></ion-input>
-    </ion-item>
+        <ion-item lines="full">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" type="email" required></ion-input>
+        </ion-item>
 
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="danger" expand="block" [disabled]="!registerForm.valid">Submit</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+        <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+            <span *ngIf="email.errors?.required">Please Enter Email</span>
+            <span *ngIf="email.errors?.email">Email is invalid</span>
+        </div>
+
+        <ion-item lines="full">
+            <ion-label position="floating">DOB</ion-label>
+            <ion-datetime (ionChange)="getDate($event)" formControlName="dob" [value]="10-01-1999"></ion-datetime>
+        </ion-item>
+        <div *ngIf="(dob.dirty || dob.touched) && dob.errors" class="errors">
+            <span *ngIf="dob.errors?.required">Please Enter DOB</span>
+        </div>
+
+        <ion-item lines="full">
+            <ion-label position="floating">Mobile</ion-label>
+            <ion-input formControlName="mobile" type="text" required></ion-input>
+        </ion-item>
+
+        <div *ngIf="(mobile.dirty || mobile.touched) && mobile.errors" class="errors">
+            <span *ngIf="mobile.errors?.required">Please Enter Mobile No</span>
+            <span *ngIf="mobile.errors?.minlength || mobile.errors?.maxlength">Mobile No is invalid</span>
+        </div>
+
+        <ion-row>
+            <ion-col>
+                <ion-button type="submit" color="danger" expand="block" [disabled]="!registerForm.valid">Submit</ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
 </ion-content>

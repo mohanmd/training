@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-back-button slot="start"></ion-back-button>
+        <ion-title>Users List</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <div *ngIf="users">
+        <ion-card *ngFor="let item of users">
+            <ion-card-content class="">
+                <ion-item>
+                    <div>
+                        <h3>Name</h3>
+                        <div>{{item.name }}</div>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div>
+                        <h3>Email</h3>
+                        <div>{{item.email }}</div>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div>
+                        <h3>Mobile</h3>
+                        <div>{{item.mobile }}</div>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div>
+                        <h3>DOB</h3>
+                        <div>{{item.dob | date : 'dd-MM-YYYY' }}</div>
+                    </div>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>
